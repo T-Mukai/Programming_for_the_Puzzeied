@@ -6,6 +6,7 @@
 
 cap1 = ['F', 'F', 'B', 'B', 'B', 'F', 'B','B', 'B', 'F', 'F', 'B', 'F' ]
 cap2 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'F', 'F' ]
+cap3 = []
 
 def pleaseConform(caps):
     #Initialization
@@ -14,6 +15,7 @@ def pleaseConform(caps):
     backward = 0
     intervals = []
 
+    caps = caps + ['END']
     #Determine intervals where caps are on in the same direction
     for i in range(1, len(caps)):
         if caps[start] != caps[i]:
@@ -25,13 +27,6 @@ def pleaseConform(caps):
             else:
                 backward += 1
             start = i
-
-    #Need to add the last interval after for loop completes execution
-    intervals.append((start, len(caps) - 1, caps[start]))
-    if caps[start] == 'F':
-        forward += 1
-    else:
-        backward += 1
 
 ##    print (intervals)
 ##    print (forward, backward)
@@ -49,3 +44,4 @@ def pleaseConform(caps):
 
 pleaseConform(cap1)
 ##pleaseConform(cap2)
+pleaseConform(cap3)

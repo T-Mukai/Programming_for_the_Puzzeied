@@ -6,6 +6,7 @@
 
 cap1 = ['F', 'F', 'B', 'B', 'B', 'F', 'B','B', 'B', 'F', 'F', 'B', 'F' ]
 cap2 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'F', 'F' ]
+cap3 = ['F', 'F', 'B', 'H', 'B', 'F', 'B', 'B', 'B', 'F', 'H', 'F', 'F' ]
 
 def pleaseConform(caps):
     #Initialization
@@ -14,24 +15,22 @@ def pleaseConform(caps):
     backward = 0
     intervals = []
 
+    caps = caps + ['END']
     #Determine intervals where caps are on in the same direction
     for i in range(1, len(caps)):
         if caps[start] != caps[i]:
             # each interval is a tuple with 3 elements (start, end, type)
             intervals.append((start, i - 1, caps[start]))
 
-            if caps[start] == 'F':
-                forward += 1
+            if caps[i] != 'H':
+                if caps[start] == 'F':
+                    forward += 1
+                else:
+                    backward += 1
+                start = i
             else:
-                backward += 1
-            start = i
-
-    #Need to add the last interval after for loop completes execution
-    intervals.append((start, len(caps) - 1, caps[start]))
-    if caps[start] == 'F':
-        forward += 1
-    else:
-        backward += 1
+                start = i + 1
+                i = i + 1
 
 ##    print (intervals)
 ##    print (forward, backward)
@@ -48,4 +47,5 @@ def pleaseConform(caps):
                 print ('People in positions', t[0], 'through', t[1], 'flip your caps!')
 
 pleaseConform(cap1)
-##pleaseConform(cap2)
+pleaseConform(cap2)
+pleaseConform(cap3)
